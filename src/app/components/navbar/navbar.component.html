@@ -1,0 +1,206 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Incident Reporting</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!--User Form-->
+<div *ngIf="!hideUserForm && hideIncidentForm" id="home" name="home" class="container">
+  <form [formGroup]="userForm">
+    <div class="row">
+      <div class="col">
+        <label>
+          First Name
+          <input type="text" class="form-control" formControlName="firstName" required>
+        </label>
+        <div
+          *ngIf="userForm.get('firstName').invalid && (userForm.get('firstName').dirty || userForm.get('firstName').touched)"
+          class="alert alert-danger">
+          <div *ngIf="userForm.get('firstName').errors.required">
+            First Name is required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          Last Name
+          <input type="text" class="form-control" formControlName="lastName">
+        </label>
+        <div
+          *ngIf="userForm.get('lastName').invalid && (userForm.get('lastName').dirty || userForm.get('lastName').touched)"
+          class="alert alert-danger">
+          <div *ngIf="userForm.get('lastName').errors.required">
+            Last Name is required.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          Street
+          <input type="text" class="form-control" formControlName="street">
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          City
+          <input type="text" class="form-control" formControlName="city">
+        </label>
+        <div *ngIf="userForm.get('city').invalid && (userForm.get('city').dirty || userForm.get('city').touched)"
+          class="alert alert-danger">
+          <div *ngIf="userForm.get('city').errors.required">
+            City is required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          Zip Code
+          <input type="text" class="form-control" formControlName="postCode">
+        </label>
+        <div
+          *ngIf="userForm.get('postCode').invalid && (userForm.get('postCode').dirty || userForm.get('postCode').touched)"
+          class="alert alert-danger">
+          <div *ngIf="userForm.get('postCode').errors.required">
+            Post Code is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <button type="Next" class="btn btn-primary" [disabled]="!userForm.valid" (click)="onUserformClick()">Next</button>
+  </form>
+</div>
+
+<!--Incident Reporting Form-->
+<div *ngIf="!hideIncidentForm && hideUserForm" class="container">
+  <form [formGroup]="incidentForm">
+    <div class="row">
+      <div class="col">
+        <label>
+          Incident Circumstances
+          <textarea id="circumstances" class="form-control" formControlName="circumstances" rows="2"
+            cols="25"></textarea>
+        </label>
+        <div
+          *ngIf="incidentForm.get('circumstances').invalid && (incidentForm.get('circumstances').dirty || incidentForm.get('circumstances').touched)"
+          class="alert alert-danger">
+          <div *ngIf="incidentForm.get('circumstances').errors.required">
+            Incident circumstances are required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          Witnesses
+          <textarea id="witnessess" class="form-control" formControlName="witnessess" rows="2" cols="25"></textarea>
+        </label>
+        <div
+        *ngIf="incidentForm.get('witnessess').invalid && (incidentForm.get('witnessess').dirty || incidentForm.get('witnessess').touched)"
+        class="alert alert-danger">
+        <div *ngIf="incidentForm.get('witnessess').errors.required">
+          At least one witness are required.
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          Interventions taken to care for the resident immediately after the incident
+          <textarea id="interventionsTaken" class="form-control" formControlName="interventionsTaken" rows="2" cols="70"></textarea>
+        </label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          Notifications made as a result of an incident
+          <textarea id="notificationsMade" class="form-control" formControlName="notificationsMade" rows="2" cols="70"></textarea>
+        </label>
+        <div
+        *ngIf="incidentForm.get('notificationsMade').invalid && (incidentForm.get('notificationsMade').dirty || incidentForm.get('notificationsMade').touched)"
+        class="alert alert-danger">
+        <div *ngIf="incidentForm.get('notificationsMade').errors.required">
+          Notifications are required.
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          Vital signs and observations made after the incident
+          <textarea id="vitalSings" class="form-control" formControlName="vitalSings" rows="2" cols="70"></textarea>
+        </label>
+        <div
+        *ngIf="incidentForm.get('vitalSings').invalid && (incidentForm.get('vitalSings').dirty || incidentForm.get('vitalSings').touched)"
+        class="alert alert-danger">
+        <div *ngIf="incidentForm.get('vitalSings').errors.required">
+          Vital Singe and Observations are required.
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          Residents activity at the time of the incident
+          <textarea id="residentActivity" class="form-control" formControlName="residentActivity" rows="2" cols="70"></textarea>
+        </label>
+        <div
+        *ngIf="incidentForm.get('residentActivity').invalid && (incidentForm.get('residentActivity').dirty || incidentForm.get('residentActivity').touched)"
+        class="alert alert-danger">
+        <div *ngIf="incidentForm.get('residentActivity').errors.required">
+           If no activity found, enter 'NONE'
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>
+          Corrective actions taken to reduce the likelihood of another incident
+          <textarea id="correctiveActions" class="form-control" formControlName="correctiveActions" rows="2" cols="70"></textarea>
+        </label>
+      </div>
+    </div>
+  </form>
+  
+  <button type="submit" class="btn btn-primary" [disabled]="!incidentForm.valid"
+    (click)="onIncidentFormClick()">Submit</button>
+</div>
+
+<div *ngIf="!hideIncidentForm && !hideUserForm" class="alert alert-success" role="alert">
+  The Incident details has been submitted. Thank you for reporting.
+</div>
